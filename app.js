@@ -3,15 +3,14 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const mongoose = require('./database');
-
-const authRouter = require('./routes/auth');
-// const mdBooksRouter = require('./routes/mdBooks');
-// const mdNotesRouter = require('./routes/mdNotes');
-
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const cors = require('cors');
+const mongoose = require('mongoose')
 
+require('./database');
+
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -21,13 +20,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-// app.use(cors({
-//   credentials: true,
-//   origin: ['http://localhost:4200']
-// }));
-
 
 app.use(session({
   store: new MongoStore({
@@ -42,17 +34,14 @@ app.use(session({
   }
  }));
 
+ app.use(cors({
+  credentials: true,
+  origin: [process.env.CLIENT_URL]
+}));
+
 app.use('/api/auth', authRouter);
-// app.use('/api/mdBooks', mdBooksRouter);
-// app.use('/api/mdBooks', mdNotesRouter);
 
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  res.status(404).json({code: 'not found'});
-});
-
-//ERROR:
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.status(404).json({code: 'not found'});
