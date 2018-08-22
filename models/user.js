@@ -19,7 +19,7 @@ const userSchema = new Schema({
   },
   favorites: [{
     type: ObjectId,
-    ref: 'Places'
+    ref: 'Recipes'
   }],
 }, {
   timestamps: true

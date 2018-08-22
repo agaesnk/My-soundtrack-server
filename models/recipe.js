@@ -15,11 +15,7 @@ const recipeSchema = new Schema({
   category:{ 
     type: String, 
     required: true,
-    enum: ['desserts','smoothies','creams','salads','rice','pasta','fish','meat'] 
-  },
-  time: {
-    type: String, 
-    required: true,
+    enum: ['desserts','juices and smoothies','creams','salads','rice','pasta','fish','meat'] 
   },
   level: {
     type: String, 
@@ -27,16 +23,12 @@ const recipeSchema = new Schema({
     enum: ['easy peasy','maybe you can','just for a boss']
   },
   ingredients: {
-    type: String,
+    type: [String],
     required: true,
   },
   description: { 
     type: String, 
-    required: true 
-  },  
-  imgUrl: { 
-    type: String, 
-    default: '/images/dog-default.jpg' 
+    required: true  
   },
   owner: { 
     type: ObjectId,
@@ -49,6 +41,6 @@ const recipeSchema = new Schema({
   }
 });
 
-const Place = mongoose.model('Place', placeSchema);
+const Recipe = mongoose.model('Recipe', recipeSchema);
 
-module.exports = Place;
+module.exports = Recipe;
