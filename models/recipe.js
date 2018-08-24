@@ -15,7 +15,7 @@ const recipeSchema = new Schema({
   category:{ 
     type: String, 
     required: true,
-    enum: ['desserts','juices and smoothies','creams','salads','rice','pasta','fish','meat'] 
+    enum: ['desserts','juices and smoothies','creams','salads','rice','pasta'] 
   },
   level: {
     type: String, 

@@ -41,13 +41,7 @@ app.use(session({
 }));
 
 app.use('/api/auth', authRouter);
-app.use('/api/recipes',(req, res, next) => {
-  if (req.session.currentUser){
-    next();
-  } else {
-    res.status(401).json({code: 'unauthorized'});
-  }
-},  recipesRouter);
+app.use('/api/recipes', recipesRouter);
 
 
 // catch 404 and forward to error handler
