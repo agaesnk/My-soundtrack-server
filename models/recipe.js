@@ -26,9 +26,13 @@ const recipeSchema = new Schema({
     type: [String],
     required: true,
   },
-  description: { 
+  elaboration: { 
     type: String, 
     required: true  
+  },
+  photo: {
+    type:String,
+    required: true
   },
   owner: { 
     type: ObjectId,

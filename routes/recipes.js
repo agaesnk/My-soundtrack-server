@@ -18,6 +18,7 @@ router.post('/add', checkCU,  (req, res, next) => {
     level, 
     ingredients, 
     elaboration, 
+    photo,
   } = req.body;
 
   const owner = req.session.currentUser._id;
@@ -29,6 +30,7 @@ router.post('/add', checkCU,  (req, res, next) => {
     level,
     ingredients: ingredients.split(','),
     elaboration,
+    photo,
     owner
   });
 
@@ -100,11 +102,22 @@ router.put('/:id', checkCU, (req, res, next) => {
     level, 
     ingredients, 
     elaboration, 
+    photo
   } = req.body;
 
-  Recipe.findByIdAndUpdate({_id: recipeId}, req.body)
-    .then((recipeId) => {
-      res.status(200).json(recipeId)
+  const data = {
+    title, 
+    description, 
+    category, 
+    level, 
+    ingredients, 
+    elaboration, 
+    photo
+  }
+
+  Recipe.findByIdAndUpdate({_id: recipeId}, req.body, {new: true})
+    .then((dataUpdate) => {
+      res.status(200).json(dataUpdate)
     })
     .catch((error) => {
       next(error);
@@ -122,20 +135,5 @@ router.delete('/:id', checkCU, (req, res, next) => {
       next(error);
     })
 })
-
-
-
-// router.delete('/:id', (req, res, next)=>{
-//   const {id} = req.params;    
- 
-//   Recipe.deleteOne({_id: id})
-//     .then(() => {
-//       // console.log('borrado')
-//       res.status(200).json(Recipe);
-//     })
-//     .catch(error =>{
-//       next(error);
-//     })
-// });
 
 module.exports = router;

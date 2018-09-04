@@ -17,10 +17,6 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  favorites: [{
-    type: ObjectId,
-    ref: 'Recipes'
-  }],
 }, {
   timestamps: true
 });

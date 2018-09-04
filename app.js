@@ -8,6 +8,8 @@ const MongoStore = require('connect-mongo')(session);
 const cors = require('cors');
 const mongoose = require('mongoose')
 
+// const angularFileUpload = angular.module('my-app', ['angularFileUpload']);
+
 require('./database');
 
 const authRouter = require('./routes/auth');
@@ -42,6 +44,7 @@ app.use(session({
 
 app.use('/api/auth', authRouter);
 app.use('/api/recipes', recipesRouter);
+// app.use('/api/recipes/:id', angularFileUpload);
 
 
 // catch 404 and forward to error handler
